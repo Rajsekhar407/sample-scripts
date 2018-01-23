@@ -1,0 +1,13 @@
+---
+- hosts: node
+  remote_user: centos
+  become_method : sudo
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: "install httpd"
+      yum: name=httpd state=present
+    - name: "install php-mysql"
+      yum: name=php-mysql state=present
+#    - name: "install mysqlserver"
+#      yum: name=mysql-server state=present

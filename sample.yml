@@ -1,0 +1,58 @@
+---
+- hosts: node
+  remote_user: centos
+  become_method : sudo
+  become: yes
+  gather_facts: yes
+  vars:
+    packages: 
+      - python-dev
+      - python-pip
+      - gcc
+      - python-setuptools
+      - git-core
+      - python-setuptools
+      - debconf-utils
+
+  tasks: 
+    - name: Add java Repo
+      yum: name=epel-release state=present
+      become: yes
+
+    - name: install java8
+      yum: name=java-1.8.0-openjdk.x86_64 state=present
+      become: yes
+
+    - name: git
+      yum: name=git state=present
+      become: yes
+    
+    - name: maven
+      yum: name=maven state=present
+      become: yes   
+
+    - name: Add key for Jenkins Repo
+      shell: wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+      become: yes  
+
+    - name: Add Jenkins Repo
+      shell: rpm --import http://pkg.jenkins-ci.org/redhat-stable/jenkins-ci.org.key
+      become: yes
+
+    - name: Install jenkins
+      yum: name=jenkins state=present
+      become: yes
+     
+    - name: Start Jenkins
+      shell: service jenkins start
+      become: yes
+
+    - name: Restart Jenkins
+      shell: service jenkins restart
+      become: yes
+    
+#      when: ansible_os_family == "FreeBSD"
+
+#    - include: config.yml
+#    - include: cli.yml
+#    - include: plugins.yml 

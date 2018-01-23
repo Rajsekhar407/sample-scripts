@@ -1,0 +1,15 @@
+---
+- hosts: node
+  become: true
+  become_user: centos
+  tasks:
+    - name: install oracle java 1.7.0_79
+      yum: name={{pkgrepo}}/java/jdk/jdk-7u79-linux-x64.rpm 
+      package: name=java-1.7.0_79 status=present
+      run: sudo yum install java-1.8.0-openjdk
+      run: wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.0.M10/bin/apache-tomcat-9.0.0.M10.tar.gz
+      run: wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+      run: sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+      run: sudo apt-get update
+      run: sudo apt-get install jenkins
+ 
