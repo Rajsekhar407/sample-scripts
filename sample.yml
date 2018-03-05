@@ -1,5 +1,5 @@
 ---
-- hosts: node
+- hosts: localhost
   remote_user: centos
   become_method : sudo
   become: yes
@@ -51,8 +51,3 @@
       shell: service jenkins restart
       become: yes
     
-#      when: ansible_os_family == "FreeBSD"
-
-#    - include: config.yml
-#    - include: cli.yml
-#    - include: plugins.yml 
