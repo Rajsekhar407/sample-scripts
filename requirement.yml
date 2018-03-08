@@ -1,5 +1,5 @@
 ---
-- hosts: host
+- hosts: localhost
   become_user: centos 
   tasks:
     - name: ensure apache is at the latest version
