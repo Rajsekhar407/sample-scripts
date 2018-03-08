@@ -1,17 +1,17 @@
 ---
-- hosts: host
+- hosts: localhost
   become: true
   become_user: centos
- # tasks: 
+  tasks: 
   #  - name: Test connection
    #   ping: 
     #  remote_user: centos
      # state=present 
 
-#- name: Install WordPress, MySQL, Nginx, and PHP-FPM
- # roles:
-  #  - common
-   # - mysql
-    #- nginx
-   # - php-fpm
-   # - wordpress
+    - name: Install WordPress, MySQL, Nginx, and PHP-FPM
+      roles:
+        - common
+        - mysql
+        - nginx
+        - php-fpm
+        - wordpress
